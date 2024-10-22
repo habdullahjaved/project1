@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tailwind Project</title>
+    <link href="/dist/styles.css" rel="stylesheet" />
+    <script defer>
+      // Function to toggle the mobile menu
+      function toggleMobileMenu() {
+        const mobileMenu = document.getElementById("mobile-menu");
+        const openIcon = document.querySelector(
+          'button[data-slot="icon"] .block'
+        );
+        const closeIcon = document.querySelector(
+          'button[data-slot="icon"] .hidden'
+        );
+
+        mobileMenu.classList.toggle("hidden"); // Toggle the visibility of the mobile menu
+        openIcon.classList.toggle("hidden"); // Toggle hamburger menu icon
+        closeIcon.classList.toggle("hidden"); // Toggle close icon
+      }
+
+      // Function to toggle the profile dropdown
+      function toggleProfileDropdown() {
+        const profileDropdown = document.getElementById("profile-dropdown");
+        profileDropdown.classList.toggle("hidden"); // Toggle visibility of the dropdown
+      }
+
+      // Close dropdown when clicking outside
+      document.addEventListener("click", function (event) {
+        const profileButton = document.getElementById("user-menu-button");
+        const profileDropdown = document.getElementById("profile-dropdown");
+
+        if (
+          !profileButton.contains(event.target) &&
+          !profileDropdown.contains(event.target)
+        ) {
+          profileDropdown.classList.add("hidden"); // Close dropdown if clicked outside
+        }
+      });
+    </script>
+  </head>
+  <body class="">
+    <nav class="bg-gray-800">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between">
+          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <!-- Mobile menu button-->
+            <button
+              type="button"
+              class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+              onclick="toggleMobileMenu()"
+            >
+              <span class="sr-only">Open main menu</span>
+              <svg
+                class="block h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+              <svg
+                class="hidden h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18 18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+          >
+            <div class="flex flex-shrink-0 items-center">
+              <img
+                class="h-8 w-auto"
+                src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
+                alt="Your Company"
+              />
+            </div>
+            <div class="hidden sm:ml-6 sm:block">
+              <div class="flex space-x-4">
+                <a
+                  href="#"
+                  class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                  aria-current="page"
+                  >Dashboard</a
+                >
+                <a
+                  href="#"
+                  class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  >Team</a
+                >
+                <a
+                  href="#"
+                  class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  >Projects</a
+                >
+                <a
+                  href="#"
+                  class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  >Calendar</a
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+          >
+            <button
+              type="button"
+              class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+            >
+              <span class="sr-only">View notifications</span>
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+                />
+              </svg>
+            </button>
+
+            <!-- Profile dropdown -->
+            <div class="relative ml-3">
+              <button
+                type="button"
+                class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                id="user-menu-button"
+                aria-expanded="false"
+                aria-haspopup="true"
+                onclick="toggleProfileDropdown()"
+              >
+                <span class="sr-only">Open user menu</span>
+                <img
+                  class="h-8 w-8 rounded-full"
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  alt=""
+                />
+              </button>
+              <div
+                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="user-menu-button"
+                id="profile-dropdown"
+              >
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700"
+                  >Your Profile</a
+                >
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700"
+                  >Settings</a
+                >
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700"
+                  >Sign out</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu, hidden by default -->
+      <div class="sm:hidden hidden" id="mobile-menu">
+        <div class="space-y-1 px-2 pb-3 pt-2">
+          <a
+            href="#"
+            class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+            aria-current="page"
+            >Dashboard</a
+          >
+          <a
+            href="#"
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >Team</a
+          >
+          <a
+            href="#"
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >Projects</a
+          >
+          <a
+            href="#"
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >Calendar</a
+          >
+        </div>
+      </div>
+    </nav>
+    <section class="bg-white">
+      <div
+        class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:flex lg:items-center lg:px-8"
+      >
+        <!-- Two Column Layout -->
+        <div class="lg:w-1/2">
+          <!-- CTA Content -->
+          <h1
+            class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+          >
+            Build your brand with us
+          </h1>
+          <p class="mt-4 text-lg text-gray-600">
+            Elevate your business with our world-class solutions. Join us to
+            take your brand to the next level. We provide services tailored to
+            your needs, with a focus on efficiency and growth.
+          </p>
+          <div class="mt-8">
+            <a
+              href="#"
+              class="inline-block bg-blue-600 px-6 py-3 text-lg font-medium text-white rounded-md shadow hover:bg-blue-700"
+              >Get Started</a
+            >
+            <a
+              href="#"
+              class="ml-4 inline-block bg-gray-100 px-6 py-3 text-lg font-medium text-blue-600 rounded-md shadow hover:bg-gray-200"
+              >Learn More</a
+            >
+          </div>
+        </div>
+
+        <!-- Illustration Column -->
+        <div class="mt-8 lg:mt-0 lg:w-1/2 lg:pl-8">
+          <img
+            class="w-full h-auto rounded-lg shadow-lg"
+            src="https://placehold.co/600x400"
+            alt="Illustration Image"
+          />
+        </div>
+      </div>
+    </section>
+    <section class="bg-gray-50 py-12">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center">
+          <h2
+            class="text-base font-semibold uppercase tracking-wide text-indigo-600"
+          >
+            Features
+          </h2>
+          <p
+            class="mt-2 text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl"
+          >
+            Everything you need to grow your business
+          </p>
+          <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+            Tailored services and tools to take your business to the next level.
+          </p>
+        </div>
+
+        <div class="mt-10">
+          <dl
+            class="space-y-10 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10 md:space-y-0"
+          >
+            <div class="relative">
+              <dt>
+                <div
+                  class="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white"
+                >
+                  <!-- Icon (Example: Chart Bar) -->
+                  <svg
+                    class="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M11 12h9m-9 4h6M5 16h.01M11 8h9M5 8h.01M7 20h10a2 2 0 002-2V6a2 2 0 00-2-2H7a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    ></path>
+                  </svg>
+                </div>
+                <p class="ml-16 text-lg font-medium leading-6 text-gray-900">
+                  Business Analytics
+                </p>
+              </dt>
+              <dd class="mt-2 ml-16 text-base text-gray-500">
+                Comprehensive reports and insights to make data-driven
+                decisions.
+              </dd>
+            </div>
+
+            <div class="relative">
+              <dt>
+                <div
+                  class="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white"
+                >
+                  <!-- Icon (Example: Shield) -->
+                  <svg
+                    class="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 22c4.418 0 8-3.582 8-8V9a8 8 0 00-16 0v5c0 4.418 3.582 8 8 8z"
+                    ></path>
+                  </svg>
+                </div>
+                <p class="ml-16 text-lg font-medium leading-6 text-gray-900">
+                  Security & Protection
+                </p>
+              </dt>
+              <dd class="mt-2 ml-16 text-base text-gray-500">
+                World-class security measures to protect your data.
+              </dd>
+            </div>
+
+            <!-- Add more features similarly -->
+          </dl>
+        </div>
+      </div>
+    </section>
+    <section class="bg-white py-12">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center">
+          <h2
+            class="text-base font-semibold uppercase tracking-wide text-indigo-600"
+          >
+            Testimonials
+          </h2>
+          <p
+            class="mt-2 text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl"
+          >
+            What our clients say
+          </p>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+            <p class="text-xl font-semibold text-gray-900">
+              "Tailwind transformed our workflow!"
+            </p>
+            <p class="mt-2 text-base text-gray-600">
+              We've seen a dramatic increase in efficiency since using Tailwind.
+            </p>
+            <div class="mt-4 flex items-center">
+              <img
+                class="h-12 w-12 rounded-full"
+                src="https://via.placeholder.com/100"
+                alt="Client photo"
+              />
+              <div class="ml-4">
+                <p class="text-sm font-medium text-gray-900">John Doe</p>
+                <p class="text-sm text-gray-500">CEO, Company</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add more testimonial cards as needed -->
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gray-50 py-12">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2
+            class="text-base font-semibold uppercase tracking-wide text-indigo-600"
+          >
+            Pricing Plans
+          </h2>
+          <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+            Choose the plan that’s right for you
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- Basic Plan -->
+          <div class="bg-white p-8 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold text-gray-900">Basic</h3>
+            <p class="mt-4 text-gray-600">
+              A great plan for small businesses starting out.
+            </p>
+            <p class="mt-8 text-3xl font-extrabold text-gray-900">$19/month</p>
+            <ul class="mt-4 space-y-2 text-gray-600">
+              <li>10 GB of storage</li>
+              <li>24/7 support</li>
+              <li>Free updates</li>
+            </ul>
+            <a
+              href="#"
+              class="mt-8 block w-full bg-indigo-600 py-3 px-4 text-center text-white font-medium rounded-md hover:bg-indigo-700"
+              >Choose Plan</a
+            >
+          </div>
+
+          <!-- More pricing cards... -->
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-12">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2
+            class="text-base font-semibold uppercase tracking-wide text-indigo-600"
+          >
+            Get in Touch
+          </h2>
+          <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+            We'd love to hear from you!
+          </p>
+        </div>
+
+        <div class="mt-10">
+          <form action="#" method="POST" class="space-y-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700"
+                >Name</label
+              >
+              <input
+                type="text"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700"
+                >Email</label
+              >
+              <input
+                type="email"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700"
+                >Message</label
+              >
+              <textarea
+                rows="4"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              ></textarea>
+            </div>
+            <div>
+              <button
+                type="submit"
+                class="w-full bg-indigo-600 text-white font-medium py-3 rounded-md hover:bg-indigo-700 transition duration-300"
+              >
+                Send Message
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gray-50 py-12">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2
+            class="text-base font-semibold uppercase tracking-wide text-indigo-600"
+          >
+            Latest from the Blog
+          </h2>
+          <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+            Insights and updates
+          </p>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div
+            class="overflow-hidden rounded-lg shadow-lg transition-transform transform hover:-translate-y-1"
+          >
+            <img
+              class="h-48 w-full object-cover"
+              src="https://via.placeholder.com/400x300"
+              alt="Blog post"
+            />
+            <div class="p-6 bg-white">
+              <h3 class="text-lg font-medium text-gray-900">
+                Understanding Tailwind CSS
+              </h3>
+              <p class="mt-2 text-gray-600">
+                A deep dive into the utility-first approach of Tailwind CSS and
+                its advantages over traditional CSS frameworks.
+              </p>
+              <a
+                href="#"
+                class="mt-4 inline-block text-indigo-600 font-medium hover:underline"
+                >Read More</a
+              >
+            </div>
+          </div>
+
+          <!-- Add more blog posts similarly -->
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
